@@ -1,0 +1,22 @@
+{
+  "name": "twitch-github-projects-azure",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start & npm run watch",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.3.8",
+    "axios": "^0.19.2",
+    "firebase-admin": "^8.9.2",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@azure/functions": "^1.0.2-beta2",
+    "typescript": "^3.3.3"
+  }
+}
