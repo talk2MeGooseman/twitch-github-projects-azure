@@ -1,0 +1,5 @@
+GET http://localhost:7071/api/FetchChannel
+Content-Type: application/json
+x-extension-jwt: 'test'
+
+{}

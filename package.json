@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "prebuild": "rimraf dist/",
     "build": "tsc",
     "watch": "tsc -w",
     "prestart": "npm run build",
@@ -16,7 +17,8 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
-    "@azure/functions": "^1.0.2-beta2",
-    "typescript": "^3.3.3"
+    "@azure/functions": "^1.2.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
   }
 }
