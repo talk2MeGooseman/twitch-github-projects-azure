@@ -1,9 +1,9 @@
 import { BROADCASTER_COLLECTION } from "../constants"
-import { GithubRepo } from "./types"
+import { FireGithubRepo } from "./types"
 
 export default async function saveGithubRepos(
   db: FirebaseFirestore.Firestore,
-  repos: [GithubRepo],
+  repos: [FireGithubRepo],
   channel_id: string,
 ) {
   var saveRef = db.collection(BROADCASTER_COLLECTION)

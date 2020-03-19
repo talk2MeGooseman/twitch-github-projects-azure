@@ -1,5 +1,5 @@
 import { BROADCASTER_COLLECTION } from "../constants";
-import { GithubRepo } from "./types";
+import { FireGithubRepo } from "./types";
 
 export default async function getSelectedRepos(db: FirebaseFirestore.Firestore, channel_id: string, selected_repos: [string]) {
   var channelRef = db.collection(BROADCASTER_COLLECTION).doc(channel_id);
@@ -15,6 +15,6 @@ export default async function getSelectedRepos(db: FirebaseFirestore.Firestore, 
     return null;
   }
   return userData?.selected_repos.map((repo_id: string) => {
-    return userData?.repos.find((repo: GithubRepo) => repo.id === repo_id);
+    return userData?.repos.find((repo: FireGithubRepo) => repo.id === repo_id);
   });
 }

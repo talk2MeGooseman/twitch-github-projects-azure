@@ -3,7 +3,6 @@ import { JWT_HEADER } from "../shared/constants"
 import * as TokenUtils from "../shared/TokenUtils"
 import { getBroadcasterInfo, initFirestore } from "../shared/Firebase"
 import { DecodedTwitchToken } from "../shared/TokenUtils/types"
-import { FireGithubRepo } from "../shared/Firebase/types"
 
 const firestoreDb = initFirestore();
 
@@ -27,27 +26,11 @@ const httpTrigger: AzureFunction = async function(
 
   let user = await getBroadcasterInfo(firestoreDb, decodedToken.channel_id)
 
-  let repos: FireGithubRepo[] = []
-  if (user?.selected_repos) {
-    repos = user.selected_repos.reduce((accum, repo_id) => {
-      const repo = user?.repos.find((repo) => {
-        return repo.id === repo_id
-      })
-
-      if (repo) {
-        accum.push(repo)
-      }
-
-      return accum
-    }, [] as FireGithubRepo[])
-  }
-
-  if (user && repos) {
+  if (user) {
     context.res = {
       status: 200,
       body: {
-        user: { github_user: user.github_user },
-        repos,
+        ...user
       },
     }
   } else {
@@ -57,4 +40,4 @@ const httpTrigger: AzureFunction = async function(
   }
 }
 
-export default httpTrigger
+export default httpTrigger;

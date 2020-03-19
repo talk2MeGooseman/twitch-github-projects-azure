@@ -1,9 +1,10 @@
 import { BROADCASTER_COLLECTION } from "../constants"
-import { GithubInfo } from "./types"
+import { FireGithubInfo } from "./types"
+import { GithubResponse } from "../GithubAPI"
 
 export default async function saveGithubInfo(
   db: FirebaseFirestore.Firestore,
-  data: GithubInfo,
+  data: GithubResponse,
   channel_id: string,
 ) {
   var saveRef = db.collection(BROADCASTER_COLLECTION)

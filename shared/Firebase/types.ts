@@ -1,11 +1,11 @@
-export interface GithubUser {
+export interface FirebaseGithubUser {
   avatar_url: string;
   login: string;
   public_repos: number;
   repos_url: string;
 }
 
-export interface GithubRepo {
+export interface FireGithubRepo {
   description: string;
   full_name: string;
   html_url: string;
@@ -14,9 +14,9 @@ export interface GithubRepo {
   name: string;
 }
 
-export interface GithubInfo extends FirebaseFirestore.DocumentData {
-  github_user: GithubUser;
-  repos: GithubRepo[];
+export interface FireGithubInfo extends FirebaseFirestore.DocumentData {
+  github_user: FirebaseGithubUser;
+  repos: FireGithubRepo[];
   selected_repos: string[];
   user_id: string;
 }

@@ -1,9 +1,10 @@
 import getBroadcasterInfo from "./getBroadcasterInfo"
 import { BROADCASTER_COLLECTION } from "../constants"
+import { FireGithubInfo } from "./types"
 
 export default async function setSelectedRepos(
   db: FirebaseFirestore.Firestore,
-  selected_repos: [string],
+  selected_repos: string[],
   channel_id: string,
 ) {
   var saveRef = db.collection(BROADCASTER_COLLECTION)
