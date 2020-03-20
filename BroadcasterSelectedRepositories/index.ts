@@ -28,19 +28,25 @@ const httpTrigger: AzureFunction = async function(
   let response
   let statusCode = 200
   try {
-    const { selected_repos }: { selected_repos: string[] } = req.body.data
+    let selectedRepos:string[] = []
+    if (req.body.data.selected_repos) {
+      selectedRepos = req.body.data
+    } else {
+      selectedRepos = req.body.data
+    }
+
     let user = await getBroadcasterInfo(firestoreDb, decodedToken.channel_id)
 
     if (user) {
       // Validate the selected repos belong to user
-      let exists = selected_repos.every((repo_id) => {
+      let exists = selectedRepos.every((repo_id) => {
         return user?.repos.find((repo) => {
           return repo.id === repo_id
         })
       })
 
       if (exists) {
-        response = await setSelectedRepos(firestoreDb, selected_repos, decodedToken.channel_id)
+        response = await setSelectedRepos(firestoreDb, selectedRepos, decodedToken.channel_id)
         // IMPORTANT: MUST SET EXTENSION IS CONFIGURED
         setExtensionConfigured(decodedToken.channel_id, process.env['twitch-secret'])
         statusCode = 201
