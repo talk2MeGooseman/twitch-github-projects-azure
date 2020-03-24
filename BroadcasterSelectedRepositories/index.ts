@@ -3,7 +3,7 @@ import { JWT_HEADER } from "../shared/constants"
 import { DecodedTwitchToken } from "../shared/TokenUtils/types"
 import { verifyToken } from "../shared/TokenUtils"
 import { getBroadcasterInfo, setSelectedRepos, initFirestore } from "../shared/Firebase"
-import { setExtensionConfigured } from "../shared/TwitchAPI"
+import { setExtensionConfigured, setConfigurationService } from "../shared/TwitchAPI"
 
 const firestoreDb = initFirestore();
 
@@ -30,7 +30,7 @@ const httpTrigger: AzureFunction = async function(
   try {
     let selectedRepos:string[] = []
     if (req.body.data.selected_repos) {
-      selectedRepos = req.body.data
+      selectedRepos = req.body.data.selected_repos
     } else {
       selectedRepos = req.body.data
     }
@@ -47,8 +47,10 @@ const httpTrigger: AzureFunction = async function(
 
       if (exists) {
         response = await setSelectedRepos(firestoreDb, selectedRepos, decodedToken.channel_id)
+        // TODO -- Set configuration service store
+        // setConfigurationService(decodedToken.channel_id, JSON.stringify(response))
         // IMPORTANT: MUST SET EXTENSION IS CONFIGURED
-        setExtensionConfigured(decodedToken.channel_id, process.env['twitch-secret'])
+        setExtensionConfigured(decodedToken.channel_id)
         statusCode = 201
       } else {
         statusCode = 400
@@ -65,6 +67,9 @@ const httpTrigger: AzureFunction = async function(
     }
   } catch (error) {
     statusCode = 400
+    response = {
+      error: error
+    }
   }
 
   context.res = {
