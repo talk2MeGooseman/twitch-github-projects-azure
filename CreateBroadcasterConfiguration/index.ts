@@ -18,7 +18,7 @@ const httpTrigger: AzureFunction = async function(
   try {
     decodedToken = verifyToken(
       jwtToken,
-      process.env["twitch-secret"],
+      process.env["twitch_secret"],
     )
   } catch (error) {
     context.res = {

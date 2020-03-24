@@ -5,7 +5,7 @@ import axios from "axios"
 export async function setExtensionConfigured(
   channel_id: string,
 ) {
-  const token = signToken(process.env['twitch-secret'] || '')
+  const token = signToken(process.env['twitch_secret'] || '')
 
   let response = await axios({
     method: "PUT",
@@ -22,7 +22,7 @@ export async function setExtensionConfigured(
 }
 
 export async function setConfigurationService(channel_id: string, content: string) {
-  const token = signToken(process.env['twitch-secret'] || '')
+  const token = signToken(process.env['twitch_secret'] || '')
 
   let response = await axios({
     method: "PUT",

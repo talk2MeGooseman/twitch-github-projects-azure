@@ -14,7 +14,8 @@
     "@types/jsonwebtoken": "^8.3.8",
     "axios": "^0.19.2",
     "firebase-admin": "^8.9.2",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "uglify-js": "^3.8.0"
   },
   "devDependencies": {
     "@azure/functions": "^1.2.0",
