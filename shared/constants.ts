@@ -1,7 +1,7 @@
 export const JWT_HEADER = 'x-extension-jwt';
 export const VERSION_HEADER = 'version';
 
-export const TWITCH_BASE_EXTENSION_URL = 'https://api.twitch.tv/extensions';
+export const TWITCH_BASE_EXTENSION_URL = 'https://api.twitch.tv/helix/extensions';
 export const GITHUB_BASE_URL = 'https://api.github.com';
 
 export const BROADCASTER_COLLECTION = 'broadcasters';

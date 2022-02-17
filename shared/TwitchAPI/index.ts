@@ -9,9 +9,11 @@ export async function setExtensionConfigured(
 
   let response = await axios({
     method: "PUT",
-    url: `${TWITCH_BASE_EXTENSION_URL}/${EXTENSION.ID}/${EXTENSION.VERSION}/required_configuration?channel_id=${channel_id}`,
+    url: `${TWITCH_BASE_EXTENSION_URL}/required_configuration?broadcaster_id=${channel_id}`,
     data: {
       required_configuration: EXTENSION.CONFIG_KEY,
+      extension_id: EXTENSION.ID,
+      extension_version: EXTENSION.VERSION
     },
     headers: {
       "Content-Type": "application/json",
@@ -26,10 +28,12 @@ export async function setConfigurationService(channel_id: string, content: strin
 
   let response = await axios({
     method: "PUT",
-    url: `https://api.twitch.tv/extensions/${EXTENSION.ID}/configurations`,
+    url: `${TWITCH_BASE_EXTENSION_URL}/configurations`,
     data: {
+      extension_id: EXTENSION.ID,
       segment: 'broadcaster',
-      channel_id,
+      version: EXTENSION.VERSION,
+      broadcaster_id: channel_id,
       content: content,
     },
     headers: {
